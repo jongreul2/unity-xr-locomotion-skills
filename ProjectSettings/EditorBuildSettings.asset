@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Demos/LocomotionCourse.unity
+    guid: f1627b3581b523a4c8416aaee4ed8940
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 8afbf2980abfd734da95c2bebf50f8fb, type: 2}

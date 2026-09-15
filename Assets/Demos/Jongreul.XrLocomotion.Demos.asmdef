@@ -1,0 +1,19 @@
+{
+    "name": "Jongreul.XrLocomotion.Demos",
+    "rootNamespace": "Jongreul.XrLocomotion.Demos",
+    "references": [
+        "Jongreul.XrLocomotion.Core",
+        "Jongreul.XrLocomotion",
+        "UnityEngine.UI",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
