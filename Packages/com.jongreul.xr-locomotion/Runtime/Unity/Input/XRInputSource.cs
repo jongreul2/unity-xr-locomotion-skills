@@ -1,0 +1,83 @@
+using UnityEngine;
+using UnityEngine.XR;
+
+namespace Jongreul.XrLocomotion
+{
+    /// <summary>한 프레임의 손 입력. 위치·회전은 트래킹 원점(플레이어 리그) 기준.</summary>
+    public readonly struct HandInputFrame
+    {
+        public readonly bool Tracked;
+        public readonly Vector3 Position;
+        public readonly Quaternion Rotation;
+        public readonly float Grip;
+        public readonly float Trigger;
+        public readonly bool Primary;
+
+        /// <summary>엄지 스틱(각 축 -1~1). 왼손 = 이동, 오른손 = 스킬 선택.</summary>
+        public readonly Vector2 Stick;
+
+        public HandInputFrame(bool tracked, Vector3 position, Quaternion rotation, float grip, float trigger, bool primary,
+            Vector2 stick)
+        {
+            Tracked = tracked;
+            Position = position;
+            Rotation = rotation;
+            Grip = grip;
+            Trigger = trigger;
+            Primary = primary;
+            Stick = stick;
+        }
+    }
+
+    /// <summary>머리·손 입력 공급원. 실기기와 데스크톱 시뮬레이터가 같은 모양으로 들어온다.</summary>
+    public interface IXRInputSource
+    {
+        bool TryGetHead(out Vector3 position, out Quaternion rotation);
+        bool TryGetHand(HandSide side, out HandInputFrame frame);
+    }
+
+    /// <summary>
+    /// Unity 내장 XR 입력(<see cref="InputDevices"/>). OpenXR로 Quest 컨트롤러를 읽는다. 툴킷을 거치지 않는다.
+    /// </summary>
+    public sealed class XRDeviceInputSource : IXRInputSource
+    {
+        /// <summary>
+        /// 헤드셋 세션이 실제로 돌고 있을 때만 true. 장치 목록만 보면 헤드셋 없이도 XR 로더가 한동안
+        /// 추적되지 않는 머리 장치를 내놓아 리그가 원점에 박힌다.
+        /// </summary>
+        public bool IsAvailable =>
+            XRSettings.isDeviceActive && InputDevices.GetDeviceAtXRNode(XRNode.Head).isValid;
+
+        public bool TryGetHead(out Vector3 position, out Quaternion rotation)
+        {
+            InputDevice device = InputDevices.GetDeviceAtXRNode(XRNode.Head);
+            position = default;
+            rotation = Quaternion.identity;
+            return device.isValid &&
+                   device.TryGetFeatureValue(CommonUsages.devicePosition, out position) &&
+                   device.TryGetFeatureValue(CommonUsages.deviceRotation, out rotation);
+        }
+
+        public bool TryGetHand(HandSide side, out HandInputFrame frame)
+        {
+            InputDevice device = InputDevices.GetDeviceAtXRNode(side == HandSide.Left ? XRNode.LeftHand : XRNode.RightHand);
+            if (!device.isValid)
+            {
+                frame = default;
+                return false;
+            }
+
+            device.TryGetFeatureValue(CommonUsages.isTracked, out bool tracked);
+            device.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
+            if (!device.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation))
+                rotation = Quaternion.identity;
+            device.TryGetFeatureValue(CommonUsages.grip, out float grip);
+            device.TryGetFeatureValue(CommonUsages.trigger, out float trigger);
+            device.TryGetFeatureValue(CommonUsages.primaryButton, out bool primary);
+            device.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 stick);
+
+            frame = new HandInputFrame(tracked, position, rotation, grip, trigger, primary, stick);
+            return true;
+        }
+    }
+}
