@@ -35,7 +35,7 @@ namespace Jongreul.XrLocomotion
         string _deniedText;
 
         /// <summary>손 위로 띄우는 거리(m). 크기 보정이 바꾼다.</summary>
-        public float Offset { get; set; } = 0.125f;
+        public float Offset { get; set; } = 0.17f; // 아래 칸이 손바닥에 가리지 않을 만큼
 
         /// <summary>메뉴 크기 배율. 크기 보정이 바꾼다.</summary>
         public float Scale { get; set; } = 1f;

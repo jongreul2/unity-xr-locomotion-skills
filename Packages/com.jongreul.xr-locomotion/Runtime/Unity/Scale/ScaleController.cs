@@ -65,7 +65,7 @@ namespace Jongreul.XrLocomotion
                 _rig.Camera.nearClipPlane = values.NearClip;
             if (_menu != null)
             {
-                _menu.Offset = values.UiDistance * 0.25f;
+                _menu.Offset = values.UiDistance * 0.34f;
                 _menu.Scale = values.Scale;
             }
 
@@ -97,7 +97,7 @@ namespace Jongreul.XrLocomotion
             go.transform.localPosition = localPosition;
             Kit.Primitive(PrimitiveType.Cube, go.transform, "Plate", new Vector3(0f, 0.02f, 0f), new Vector3(size.x, 0.04f, size.y),
                 color, collider: true);
-            Kit.Label(go.transform, "Label", new Vector3(0f, 0.9f, 0f), new Vector2(1.2f, 0.12f), 90).text = label;
+            Kit.Label(go.transform, "Label", new Vector3(0f, 1.1f, 0f), new Vector2(1.2f, 0.3f), 220).text = $"<b>{label}</b>";
 
             var pad = go.AddComponent<ScalePad>();
             pad._controller = controller;
