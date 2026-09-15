@@ -20,5 +20,8 @@
     "com.unity.modules.unitywebrequest": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "testables": [
+    "com.jongreul.xr-locomotion"
+  ]
 }

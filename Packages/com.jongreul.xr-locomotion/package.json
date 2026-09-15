@@ -1,0 +1,15 @@
+{
+  "name": "com.jongreul.xr-locomotion",
+  "version": "0.1.0",
+  "displayName": "XR Locomotion Skills",
+  "description": "툴킷 없이 직접 구현한 VR 이동 스킬: 스킬 슬롯 프레임워크(쿨타임·수량·잠금), 라디얼 선택, 훅샷, 부스터, 백스텝, 큐브 발판, 플레이어 크기 변경 보정.",
+  "unity": "6000.3",
+  "author": {
+    "name": "Jongreul Kang",
+    "url": "https://github.com/jongreul2"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "com.unity.ugui": "2.0.0"
+  }
+}
