@@ -195,6 +195,23 @@ namespace Jongreul.XrLocomotion.Tests.Skills
         }
 
         [Test]
+        public void Cancel_StopsTheDash_AndEndsInvincibility_SoItCanBeUsedAgain()
+        {
+            var step = new BackStep();
+            int ended = 0;
+            step.InvincibilityEnded += () => ended++;
+            step.Begin(Forward, Forward, float.PositiveInfinity);
+            Run(step, 0.05);
+
+            step.Cancel();
+
+            Assert.That(step.IsDashing || step.IsInvincible, Is.False);
+            Assert.That(ended, Is.EqualTo(1));
+            Assert.That(step.Step(Dt), Is.EqualTo(Vector3.Zero));
+            Assert.That(step.Begin(Forward, Forward, float.PositiveInfinity), Is.True);
+        }
+
+        [Test]
         public void WhileDashing_ASecondBeginIsRefused()
         {
             var step = new BackStep();

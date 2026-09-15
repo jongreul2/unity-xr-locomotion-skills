@@ -83,6 +83,17 @@ namespace Jongreul.XrLocomotion.Skills
             return true;
         }
 
+        /// <summary>대시를 멈추고 무적도 끝낸다(스킬 취소·순간이동).</summary>
+        public void Cancel()
+        {
+            IsDashing = false;
+            if (_invincible)
+            {
+                _invincible = false;
+                InvincibilityEnded?.Invoke();
+            }
+        }
+
         /// <summary>이번 틱에 옮길 변위.</summary>
         public Vector3 Step(double deltaTime)
         {

@@ -13,6 +13,8 @@ namespace Jongreul.XrLocomotion.Scale
         public float AudioMaxDistance = 20f;
         public float NearClip = 0.02f;
         public float StepHeight = 0.35f;
+        public float BodyHeight = 1.7f;
+        public float BodyRadius = 0.25f;
     }
 
     public readonly struct ScaledValues
@@ -25,6 +27,8 @@ namespace Jongreul.XrLocomotion.Scale
         public readonly float AudioMaxDistance;
         public readonly float NearClip;
         public readonly float StepHeight;
+        public readonly float BodyHeight;
+        public readonly float BodyRadius;
 
         public ScaledValues(float scale, ScaleBaseline b)
         {
@@ -36,6 +40,8 @@ namespace Jongreul.XrLocomotion.Scale
             AudioMaxDistance = b.AudioMaxDistance * scale;
             NearClip = b.NearClip * scale;
             StepHeight = b.StepHeight * scale;
+            BodyHeight = b.BodyHeight * scale;
+            BodyRadius = b.BodyRadius * scale;
         }
     }
 

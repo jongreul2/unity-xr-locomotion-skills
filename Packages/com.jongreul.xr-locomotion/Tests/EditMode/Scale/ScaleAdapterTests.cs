@@ -28,6 +28,8 @@ namespace Jongreul.XrLocomotion.Tests.Scale
             Assert.That(small.UiDistance, Is.EqualTo(baseline.UiDistance * 0.5f));
             Assert.That(small.NearClip, Is.EqualTo(baseline.NearClip * 0.5f));
             Assert.That(small.StepHeight, Is.EqualTo(baseline.StepHeight * 0.5f));
+            Assert.That(big.BodyHeight, Is.EqualTo(baseline.BodyHeight * 2f));
+            Assert.That(big.BodyRadius, Is.EqualTo(baseline.BodyRadius * 2f));
         }
 
         [Test]
@@ -109,7 +111,7 @@ namespace Jongreul.XrLocomotion.Tests.Scale
         }
 
         [Test]
-        public void Retargeting_MidTransition_ContinuesFromWhereItIs()
+        public void ChangingTarget_MidTransition_ContinuesFromWhereItIs()
         {
             var adapter = new ScaleAdapter();
             adapter.SetTarget(2f);
