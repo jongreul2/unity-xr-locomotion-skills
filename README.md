@@ -9,13 +9,21 @@
 
 라이브 VR 멀티플레이 게임 개발 중 해결한 문제를 회사 코드 없이 범용으로 다시 구현했습니다.
 
-| 라디얼 선택 → 부스터 → 백스텝(1인칭) | 훅샷(관찰자 + 1인칭) |
-|---|---|
-| ![라디얼: 오른손 스틱으로 네 칸을 훑고 놓아 BOOST를 고른 뒤 달리고, BACK으로 물러난다](docs/images/radial.gif) | ![훅샷: 유리는 빨강으로 거절, 턱 벽면 윗부분을 겨누면 초록 — 떼면 당겨져 턱 위로 올라선다](docs/images/hookshot.gif) |
-| **플레이어 크기 변경(관찰자 + 1인칭)** | |
-| ![크기: x2 발판에서 커지고, x1로 돌아오고, x0.5로 작아져 낮은 굴로 들어간다](docs/images/scale.gif) | |
+**이 저장소는 기능 데모가 아니라 코드 샘플입니다.** 판정 규칙은 전부 UnityEngine 참조가 없는 C# 어셈블리에 있고, 73개 EditMode 테스트가 동작을 고정합니다. 데모 씬은 확인용으로만 두었습니다.
 
-<sub>헤드셋 없이 데스크톱 손 시뮬레이터로 헤드리스 촬영. 게임 시간을 촬영 프레임에 고정해 실제 속도로 재생된다. 헤드셋 촬영본은 추가 예정.</sub>
+## 읽는 순서
+
+코드를 보러 오셨다면 이 순서를 권합니다. 전부 `Packages/com.jongreul.xr-locomotion/` 아래에 있습니다.
+
+| # | 파일 | 무엇을 보면 되는지 |
+|---|---|---|
+| 1 | `Runtime/Core/Framework/SkillLoadout.cs` | 스킬 4종이 공유하는 규칙 하나. 조준·실행·거절·쿨타임 시작점·수량 차감 시점·서로 잠금 |
+| 2 | `Tests/EditMode/Framework/SkillLoadoutTests.cs` | "조준만 하고 취소하면 공짜", "쿨타임은 끝난 순간부터" 같은 규칙을 이름으로 읽을 수 있는 테스트 16개 |
+| 3 | `Runtime/Core/Skills/HookPull.cs` | 가속·감속 곡선으로 도착 지점을 넘지 않는 당기기, 막히면 제한 시간에 풀림 |
+| 4 | `Runtime/Core/Skills/BackStep.cs` · `Booster.cs` | 뒤 벽 거리로 잘라 내는 대시, 연료·재충전·관성 |
+| 5 | `Runtime/Core/Radial/RadialSelector.cs` | 스틱 각도 → 칸, 데드존, 경계 여유 각도로 흔들림 방지 |
+| 6 | `Runtime/Core/Scale/ScaleAdapter.cs` | 1배 기준값에서 비례 계산. 20번 왕복해도 오차 0인 이유 |
+| 7 | `Runtime/Core/Skills/CubePlatforms.cs` | 발판 개수 상한·수명·밟으면 연장 |
 
 ---
 
@@ -106,7 +114,7 @@ Jongreul.XrLocomotion        Unity 계층 — 입력·리그·모터·스킬 컴
 
 ## 관련 포트폴리오
 
-- 포트폴리오(Notion): _링크 추가 예정_
+- 포트폴리오(Notion): [강종렬 포트폴리오 2026](https://app.notion.com/p/jongreulk/2026-3d849fd9829281cba738df3134fa9b8a)
 
 ---
 
