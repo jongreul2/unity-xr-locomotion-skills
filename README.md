@@ -1,8 +1,8 @@
 # unity-xr-locomotion-skills
 
 ![Unity](https://img.shields.io/badge/Unity-6000.3%20LTS-black?logo=unity)
-![EditMode](https://img.shields.io/badge/EditMode-73%20passed-brightgreen)
-![PlayMode](https://img.shields.io/badge/PlayMode-9%20passed-brightgreen)
+![EditMode](https://img.shields.io/badge/EditMode-73%20(local)-brightgreen)
+![PlayMode](https://img.shields.io/badge/PlayMode-9%20(local)-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 **툴킷 없이 직접 구현한 VR 이동 스킬** — 스킬 슬롯 프레임워크(쿨타임·수량·잠금), 스틱 라디얼 선택, 훅샷, 부스터, 백스텝, 큐브 발판, 플레이어 크기 변경 보정.
@@ -10,6 +10,8 @@
 라이브 VR 멀티플레이 게임 개발 중 해결한 문제를 회사 코드 없이 범용으로 다시 구현했습니다.
 
 **이 저장소는 기능 데모가 아니라 코드 샘플입니다.** 판정 규칙은 전부 UnityEngine 참조가 없는 C# 어셈블리에 있고, 73개 EditMode 테스트가 동작을 고정합니다. 데모 씬은 확인용으로만 두었습니다.
+
+이 저장소는 Claude Code와 함께 작성했습니다. 문제 정의·설계·테스트 시나리오·검증 판정과 최종 결정은 본인이 했고, 구현 초안과 반복 작업은 AI가 보조했습니다. 커밋 이력의 `Co-Authored-By` 트레일러가 그 기록입니다.
 
 ## 읽는 순서
 
